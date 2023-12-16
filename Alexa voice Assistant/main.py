@@ -6,6 +6,8 @@ import webbrowser
 import os
 import smtplib
 import random
+import pywhatkit
+import pyjokes
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -94,6 +96,9 @@ if __name__ == "__main__":
             random.shuffle(songs) 
             os.startfile(os.path.join(music_dir, songs[0]))
 
+        elif 'are you single' in command:
+            speak('I am in a relationship with Wi-Fi')
+
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
@@ -107,13 +112,39 @@ if __name__ == "__main__":
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "ayushagarwaldnd02@gmail.com"    
+                to = "abc@gmail.com"    
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
                 speak("Sorry my friend harry bhai. I am not able to send this email")
 
-        elif 'shutdown' in query:
-            speak("Shurting Down. Goodbye!")
+        elif 'Bye' in query:
+            speak("OK. Goodbye!")
             exit()
+
+        elif 'date' in command:
+            speak('Sorry, I have a headache')
+        elif 'joke' in command:
+            speak(pyjokes.get_joke())
+        elif 'search' in command:
+            query = command.replace('search', '')
+            speak('Searching for ' + query)
+            pywhatkit.search(query)
+        elif 'open' in command:
+            app = command.replace('open', '')
+            speak('Opening ' + app)
+            os.system(f'open {app}')
+        elif 'shutdown' in command:
+            speak('Shutting down the system')
+            os.system('shutdown now')
+        elif 'restart' in command:
+            speak('Restarting the system')
+            os.system('restart now')
+        elif 'generate code' in command:
+            prompt = command.replace('generate code', '')
+            code = generate_code(prompt)
+            speak('Here is the generated code:')
+            speak(code)
+        else:
+            speak('Please say the command again.')
