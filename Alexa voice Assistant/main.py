@@ -153,11 +153,11 @@ if __name__ == "__main__":
             
         elif 'shutdown' in query:
             speak('Shutting down the system')
-            os.system('shutdown now')
+            os.system('shutdown /s /t 1')
             
         elif 'restart' in query:
             speak('Restarting the system')
-            os.system('restart now')
+            os.system('shutdown /r /t 1')
             
         elif 'generate code' in query:
             prompt = command.replace('generate code', '')
