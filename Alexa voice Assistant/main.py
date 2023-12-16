@@ -76,6 +76,18 @@ if __name__ == "__main__":
             print(results)
             speak(results)
 
+        elif 'song' in query:
+            song = query.replace('play song', '')
+            speak('Playing ' + song)
+            pywhatkit.playonyt(song)
+
+
+        elif 'who is' in query:
+            person = query.replace('who is', '')
+            info = wikipedia.summary(person, 1)
+            print(info)
+            talk(info)
+
         elif 'open youtube' in query:
             speak("Your command is executing please wait!")
             webbrowser.open("youtube.com")
@@ -96,7 +108,7 @@ if __name__ == "__main__":
             random.shuffle(songs) 
             os.startfile(os.path.join(music_dir, songs[0]))
 
-        elif 'are you single' in command:
+        elif 'are you single' in query:
             speak('I am in a relationship with Wi-Fi')
 
         elif 'the time' in query:
@@ -119,32 +131,39 @@ if __name__ == "__main__":
                 print(e)
                 speak("Sorry my friend harry bhai. I am not able to send this email")
 
-        elif 'Bye' in query:
+        elif 'bye' in query:
             speak("OK. Goodbye!")
             exit()
 
-        elif 'date' in command:
+        elif 'date' in query:
             speak('Sorry, I have a headache')
-        elif 'joke' in command:
+            
+        elif 'joke' in query:
             speak(pyjokes.get_joke())
-        elif 'search' in command:
-            query = command.replace('search', '')
-            speak('Searching for ' + query)
-            pywhatkit.search(query)
-        elif 'open' in command:
-            app = command.replace('open', '')
+            
+        elif 'search' in query:
+            quer = query.replace('search', '')
+            speak('Searching for ' + quer)
+            pywhatkit.search(quer)
+            
+        elif 'open' in query:
+            app = query.replace('open', '')
             speak('Opening ' + app)
             os.system(f'open {app}')
-        elif 'shutdown' in command:
+            
+        elif 'shutdown' in query:
             speak('Shutting down the system')
             os.system('shutdown now')
-        elif 'restart' in command:
+            
+        elif 'restart' in query:
             speak('Restarting the system')
             os.system('restart now')
-        elif 'generate code' in command:
+            
+        elif 'generate code' in query:
             prompt = command.replace('generate code', '')
             code = generate_code(prompt)
             speak('Here is the generated code:')
             speak(code)
+            
         else:
             speak('Please say the command again.')
